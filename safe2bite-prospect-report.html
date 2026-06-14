@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Safe2Bite | Pre-Meeting Research Report</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #1b3863;
+      --teal:      #00a5bb;
+      --teal-light:#e6f7fa;
+      --teal-mid:  #b3e8f0;
+      --white:     #ffffff;
+      --gray-text: #555;
+      --gray-light:#f4f6f9;
+      --border:    #dde3ec;
+      --green:     #1a9a5c;
+      --green-bg:  #e9f7f1;
+      --red:       #c0392b;
+      --red-bg:    #fdf0ef;
+      --orange:    #d4600a;
+      --orange-bg: #fff3ea;
+      --yellow-bg: #fefbe6;
+      --yellow:    #b58a00;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--gray-light);
+      color: var(--gray-text);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ---- HEADER ---- */
+    .report-header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 28px 40px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .report-header .brand-block h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .report-header .brand-block p {
+      font-size: 13px;
+      opacity: 0.7;
+      font-weight: 400;
+    }
+    .report-header .badge-block {
+      text-align: right;
+    }
+    .report-header .badge-block .prepared-by {
+      font-size: 12px;
+      opacity: 0.6;
+      margin-bottom: 6px;
+    }
+    .yamu-badge {
+      display: inline-block;
+      background: var(--teal);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* ---- TABS ---- */
+    .tabs-nav {
+      background: var(--white);
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      padding: 0 40px;
+      gap: 4px;
+    }
+    .tab-btn {
+      padding: 15px 22px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--gray-text);
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+      letter-spacing: 0.2px;
+    }
+    .tab-btn:hover { color: var(--teal); }
+    .tab-btn.active {
+      color: var(--navy);
+      border-bottom-color: var(--teal);
+    }
+
+    /* ---- CONTENT ---- */
+    .tab-content { display: none; padding: 36px 40px 60px; max-width: 1100px; margin: 0 auto; }
+    .tab-content.active { display: block; }
+
+    /* ---- SECTION HEADERS ---- */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+    h2.section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .section-desc {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 28px;
+    }
+
+    /* ---- CARDS ---- */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+    .card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card h3 .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    /* ---- GRID ---- */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 20px; }
+    @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+    /* ---- LOCATION CARD ---- */
+    .location-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--teal);
+      border-radius: 10px;
+      padding: 20px 22px;
+    }
+    .location-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .location-card p {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+    .location-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 8px;
+      margin-right: 4px;
+    }
+    .badge-s2b { background: #e8f4f8; color: #005f7a; }
+    .badge-tamd { background: #e8eef8; color: var(--navy); }
+
+    /* ---- STATUS BADGES ---- */
+    .status { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+    .status-active  { background: var(--green-bg); color: var(--green); }
+    .status-none    { background: var(--red-bg);   color: var(--red); }
+    .status-warn    { background: var(--orange-bg); color: var(--orange); }
+    .status-partial { background: var(--yellow-bg); color: var(--yellow); }
+    .status::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+    /* ---- TRACKING TABLE ---- */
+    .tracking-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13.5px; }
+    .tracking-table th {
+      background: var(--navy);
+      color: var(--white);
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12.5px;
+    }
+    .tracking-table th:first-child { border-radius: 8px 0 0 0; }
+    .tracking-table th:last-child  { border-radius: 0 8px 0 0; }
+    .tracking-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .tracking-table tr:last-child td { border-bottom: none; }
+    .tracking-table tr:nth-child(even) td { background: #fafbfd; }
+    .tag-code {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      background: #eef2f8;
+      color: var(--navy);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    /* ---- ISSUE CALLOUTS ---- */
+    .issue-box {
+      border-left: 4px solid;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+      font-size: 14px;
+    }
+    .issue-red    { border-color: var(--red);    background: var(--red-bg); }
+    .issue-orange { border-color: var(--orange); background: var(--orange-bg); }
+    .issue-yellow { border-color: var(--yellow); background: var(--yellow-bg); }
+    .issue-green  { border-color: var(--green);  background: var(--green-bg); }
+    .issue-box strong { color: var(--navy); display: block; margin-bottom: 4px; font-size: 14px; }
+    .issue-box p  { color: #555; font-size: 13.5px; margin: 0; }
+
+    /* ---- COMPETITOR TABLE ---- */
+    .comp-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-bottom: 24px; }
+    .comp-table th {
+      background: var(--gray-light);
+      color: var(--navy);
+      padding: 11px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--border);
+    }
+    .comp-table td { padding: 13px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-table a { color: var(--teal); text-decoration: none; font-weight: 600; }
+    .comp-table a:hover { text-decoration: underline; }
+    .comp-table .comp-name { font-weight: 600; color: var(--navy); }
+
+    /* ---- NEXT STEPS ---- */
+    .step-item {
+      display: flex;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step-item:last-child { border-bottom: none; }
+    .step-num {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-body h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .step-body p  { font-size: 13.5px; color: #666; }
+
+    /* ---- EXAMPLE CARD ---- */
+    .example-card {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a4a7a 100%);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .example-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .example-card p  { font-size: 13.5px; opacity: 0.8; line-height: 1.6; }
+    .example-card a {
+      display: inline-block;
+      background: var(--teal);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 6px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .example-card a:hover { background: #008fa2; }
+
+    /* ---- SUMMARY STRIP ---- */
+    .summary-strip {
+      background: var(--teal-light);
+      border: 1px solid var(--teal-mid);
+      border-radius: 10px;
+      padding: 18px 24px;
+      margin-bottom: 28px;
+      font-size: 14px;
+      color: #005f7a;
+    }
+    .summary-strip strong { color: var(--navy); }
+
+    /* ---- TWO-BRAND BANNER ---- */
+    .brand-banner {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .brand-banner .brand-pill {
+      flex: 1;
+      border-radius: 10px;
+      padding: 18px 22px;
+      border: 1px solid var(--border);
+    }
+    .brand-pill.s2b  { background: #e8f4f8; border-color: #b3dde8; }
+    .brand-pill.tamd { background: #e8eef8; border-color: #bccde8; }
+    .brand-pill h4   { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .brand-pill.s2b  h4 { color: #005f7a; }
+    .brand-pill.tamd h4 { color: var(--navy); }
+    .brand-pill p    { font-size: 13px; color: #555; }
+    .brand-pill .url { font-size: 12px; font-weight: 600; color: #888; margin-top: 8px; }
+
+    /* ---- KV PAIRS ---- */
+    .kv-list { list-style: none; }
+    .kv-list li { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+    .kv-list li:last-child { border-bottom: none; }
+    .kv-list .kv-key  { width: 200px; flex-shrink: 0; font-weight: 600; color: var(--navy); }
+    .kv-list .kv-val  { color: #555; }
+
+    /* ---- DIVIDER ---- */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+    /* ---- TAGS ROW ---- */
+    .tags-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .tag-pill {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .tag-teal   { background: #d0f0f6; color: #005f7a; }
+    .tag-navy   { background: #dce4f0; color: var(--navy); }
+    .tag-gray   { background: #ebebeb; color: #444; }
+
+    /* ---- INSIGHT BOX ---- */
+    .insight {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-top: 24px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .insight strong { color: var(--teal); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="report-header">
+  <div class="brand-block">
+    <h1>Safe2Bite &amp; TexasAllergyMD</h1>
+    <p>Pre-Meeting Research Report &nbsp;|&nbsp; Discovery &amp; Advertising Audit</p>
+  </div>
+  <div class="badge-block">
+    <p class="prepared-by">Prepared by</p>
+    <span class="yamu-badge">YamuMedia</span>
+  </div>
+</div>
+
+<!-- TABS NAV -->
+<div class="tabs-nav">
+  <button class="tab-btn active" onclick="switchTab('overview', this)">Business Overview</button>
+  <button class="tab-btn"        onclick="switchTab('audit',    this)">Advertising Audit</button>
+  <button class="tab-btn"        onclick="switchTab('competitors', this)">Competitors</button>
+  <button class="tab-btn"        onclick="switchTab('nextsteps', this)">Next Steps</button>
+</div>
+
+<!-- ============================== TAB 1: OVERVIEW ============================== -->
+<div id="tab-overview" class="tab-content active">
+
+  <p class="section-label">About the Practice</p>
+  <h2 class="section-title">Two Brands. One Practice. Three Locations.</h2>
+  <p class="section-desc">Safe2Bite and TexasAllergyMD are operated by the same practice and share physical clinic space in McKinney and Southlake. Each brand serves a distinct positioning purpose.</p>
+
+  <div class="brand-banner">
+    <div class="brand-pill s2b">
+      <h4>Safe2Bite | Texas Food Allergy Center</h4>
+      <p>Food allergy-only brand. Specialises in oral immunotherapy (OIT) and sublingual immunotherapy (SLIT) for children and adults across DFW. Newer brand presence, launched for the food allergy niche.</p>
+      <p class="url">safe2bitetexasfoodallergy.com &nbsp;|&nbsp; (469) 916-5504</p>
+    </div>
+    <div class="brand-pill tamd">
+      <h4>Texas Allergy, MD (TexasAllergyMD)</h4>
+      <p>General allergy and immunology brand. Covers food allergy, seasonal allergy, asthma, eczema, and immunotherapy. Longer-established online presence with active Google Ads.</p>
+      <p class="url">texasallergymd.com &nbsp;|&nbsp; (469) 375-1525</p>
+    </div>
+  </div>
+
+  <div class="summary-strip">
+    <strong>Same fax number on both sites:</strong> (877) 330-7366. McKinney and Southlake clinic addresses are identical across both brands. The Frisco location exists under Safe2Bite only; the Keller/Alliance location exists under TexasAllergyMD only.
+  </div>
+
+  <!-- LOCATIONS -->
+  <p class="section-label" style="margin-top:8px;">Clinic Locations</p>
+  <div class="grid-3">
+    <div class="location-card">
+      <h4>McKinney / Prosper</h4>
+      <p>1400 N. Coit Road, Suite 1302</p>
+      <p>McKinney, TX 75071</p>
+      <span class="location-badge badge-s2b">Safe2Bite</span>
+      <span class="location-badge badge-tamd">TexasAllergyMD</span>
+    </div>
+    <div class="location-card">
+      <h4>Southlake</h4>
+      <p>1360 N. Kimball Ave, Suite 100</p>
+      <p>Southlake, TX 76092</p>
+      <span class="location-badge badge-s2b">Safe2Bite</span>
+      <span class="location-badge badge-tamd">TexasAllergyMD</span>
+    </div>
+    <div class="location-card">
+      <h4>Frisco</h4>
+      <p>13052 Dallas Parkway, Suite 210</p>
+      <p>Frisco, TX 75034</p>
+      <span class="location-badge badge-s2b">Safe2Bite only</span>
+    </div>
+  </div>
+  <div class="grid-3">
+    <div class="location-card">
+      <h4>Keller / Alliance</h4>
+      <p>Location served by TexasAllergyMD</p>
+      <p>Keller, TX (exact address TBC)</p>
+      <span class="location-badge badge-tamd">TexasAllergyMD only</span>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- SERVICES -->
+  <p class="section-label">Services Offered</p>
+  <div class="grid-2">
+    <div class="card">
+      <h3><span class="dot"></span>Safe2Bite Services (Food Allergy Focus)</h3>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+        <li style="display:flex;gap:10px;font-size:13.5px;"><span style="color:var(--teal);font-weight:700;">&#10003;</span> Oral Immunotherapy (OIT) — peanut, milk, egg, tree nut, sesame, shellfish</li>
+        <li style="display:flex;gap:10px;font-size:13.5px;"><span style="color:var(--teal);font-weight:700;">&#10003;</span> Sublingual Immunotherapy (SLIT / allergy drops)</li>
+        <li style="display:flex;gap:10px;font-size:13.5px;"><span style="color:var(--teal);font-weight:700;">&#10003;</span> Food allergy testing and diagnosis</li>
+        <li style="display:flex;gap:10px;font-size:13.5px;"><span style="color:var(--teal);font-weight:700;">&#10003;</span> Oral Food Challenge (supervised)</li>
+        <li style="display:flex;gap:10px;font-size:13.5px;"><span style="color:var(--teal);font-weight:700;">&#10003;</span> Food allergy treatment for children and adults</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="dot"></span>TexasAllergyMD Services (Full Allergy + Immunology)</h3>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+        <li style="display:flex;gap:10px;font-size:13.5px;"><span style="color:var(--teal);font-weight:700;">&#10003;</span> All Safe2Bite services plus:</li>
+        <li style="display:flex;gap:10px;font-size:13.5px;"><span style="color:var(--teal);font-weight:700;">&#10003;</span> Seasonal and environmental allergy testing</li>
+        <li style="display:flex;gap:10px;font-size:13.5px;"><span style="color:var(--teal);font-weight:700;">&#10003;</span> Allergy shots (subcutaneous immunotherapy)</li>
+        <li style="display:flex;gap:10px;font-size:13.5px;"><span style="color:var(--teal);font-weight:700;">&#10003;</span> Asthma testing and management</li>
+        <li style="display:flex;gap:10px;font-size:13.5px;"><span style="color:var(--teal);font-weight:700;">&#10003;</span> Eczema and skin allergy care</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ONLINE PRESENCE -->
+  <p class="section-label">Online Presence</p>
+  <div class="grid-2">
+    <div class="card">
+      <h3><span class="dot"></span>Safe2Bite</h3>
+      <ul class="kv-list">
+        <li><span class="kv-key">Website</span><span class="kv-val">safe2bitetexasfoodallergy.com (41 indexed pages)</span></li>
+        <li><span class="kv-key">Facebook</span><span class="kv-val">Newly created page (ID: 61583163316718)</span></li>
+        <li><span class="kv-key">Instagram</span><span class="kv-val">@safe2bitefoodallergycenter</span></li>
+        <li><span class="kv-key">Listings</span><span class="kv-val">DFWChild, Community Impact Frisco, Birdeye, ProvenExpert</span></li>
+        <li><span class="kv-key">Reviews</span><span class="kv-val">5 on Birdeye (early stage)</span></li>
+        <li><span class="kv-key">CMS</span><span class="kv-val">WordPress + Beaver Builder</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="dot"></span>TexasAllergyMD</h3>
+      <ul class="kv-list">
+        <li><span class="kv-key">Website</span><span class="kv-val">texasallergymd.com (69 indexed pages)</span></li>
+        <li><span class="kv-key">Yelp McKinney</span><span class="kv-val">Listed with reviews (36 photos)</span></li>
+        <li><span class="kv-key">Yelp Southlake</span><span class="kv-val">Listed with reviews (39 photos)</span></li>
+        <li><span class="kv-key">Healthgrades</span><span class="kv-val">Listed (McKinney)</span></li>
+        <li><span class="kv-key">CMS</span><span class="kv-val">WordPress + Elementor</span></li>
+        <li><span class="kv-key">Ranking for</span><span class="kv-val">"food allergy treatment McKinney TX" organically</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SERVICES TAGS -->
+  <div class="card">
+    <h3><span class="dot"></span>Clinic Hours</h3>
+    <p style="font-size:13.5px;">Mon through Fri: 9 AM to 6 PM &nbsp;|&nbsp; Saturday: 8 AM to 12 PM</p>
+    <div class="tags-row" style="margin-top:14px;">
+      <span class="tag-pill tag-teal">Board-Certified Allergist</span>
+      <span class="tag-pill tag-teal">Dr. Mireku</span>
+      <span class="tag-pill tag-teal">Dr. Robert Sugerman</span>
+      <span class="tag-pill tag-navy">15+ Years Experience</span>
+      <span class="tag-pill tag-navy">Pediatric + Adult</span>
+      <span class="tag-pill tag-gray">North Texas / DFW</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================== TAB 2: AD AUDIT ============================== -->
+<div id="tab-audit" class="tab-content">
+
+  <p class="section-label">Advertising Infrastructure Audit</p>
+  <h2 class="section-title">What Is (and Is Not) Set Up</h2>
+  <p class="section-desc">Full technical audit of tracking tags, conversion setup, pixel presence, and platform activity across both websites. Checked via raw HTML source and GTM container inspection.</p>
+
+  <!-- TOP VERDICT STRIP -->
+  <div class="summary-strip">
+    <strong>Summary:</strong> TexasAllergyMD is running Google Search Ads with phone call conversion tracking. Safe2Bite has zero paid ad infrastructure. Neither brand has Meta Pixel, Bing Ads, or any social advertising setup. The entire category is uncontested on Meta.
+  </div>
+
+  <!-- MASTER TRACKING TABLE -->
+  <p class="section-label">Full Tracking Stack</p>
+  <table class="tracking-table">
+    <thead>
+      <tr>
+        <th>Signal / Tag</th>
+        <th>Safe2Bite</th>
+        <th>TexasAllergyMD</th>
+        <th>What It Means</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Google Ads (AW- tag)</strong></td>
+        <td><span class="status status-none">Not installed</span></td>
+        <td><span class="status status-active">Active</span><br/><span class="tag-code">AW-11188107517</span></td>
+        <td>TexasAllergyMD is running Google Search Ads. Safe2Bite has no paid search presence.</td>
+      </tr>
+      <tr>
+        <td><strong>Google Ads Conversion</strong></td>
+        <td><span class="status status-none">None</span></td>
+        <td><span class="status status-warn">Phone only</span><br/><span class="tag-code">LqKJCM_8lNYYEP3x89Yp</span></td>
+        <td>Only phone calls are tracked as conversions. Form submissions are not measured.</td>
+      </tr>
+      <tr>
+        <td><strong>Call Tracking Number</strong></td>
+        <td><span class="status status-none">None</span></td>
+        <td><span class="status status-active">Configured</span><br/><span class="tag-code">(469) 375-1525</span></td>
+        <td>TexasAllergyMD has Google website call conversion tracking. Calls from ad traffic are attributed.</td>
+      </tr>
+      <tr>
+        <td><strong>Meta Pixel (Facebook)</strong></td>
+        <td><span class="status status-none">Not installed</span></td>
+        <td><span class="status status-none">Not installed</span></td>
+        <td>Neither brand is running or measuring Meta (Facebook/Instagram) ads. No retargeting audience being built.</td>
+      </tr>
+      <tr>
+        <td><strong>Microsoft / Bing Ads</strong></td>
+        <td><span class="status status-none">Not installed</span></td>
+        <td><span class="status status-none">Not installed</span></td>
+        <td>No Bing Ads presence on either site. A gap given Bing's lower healthcare CPCs.</td>
+      </tr>
+      <tr>
+        <td><strong>TikTok Pixel</strong></td>
+        <td><span class="status status-none">Not installed</span></td>
+        <td><span class="status status-none">Not installed</span></td>
+        <td>No TikTok advertising infrastructure on either site.</td>
+      </tr>
+      <tr>
+        <td><strong>LinkedIn Insight Tag</strong></td>
+        <td><span class="status status-none">Not installed</span></td>
+        <td><span class="status status-none">Not installed</span></td>
+        <td>No LinkedIn advertising on either site.</td>
+      </tr>
+      <tr>
+        <td><strong>Google Analytics 4</strong></td>
+        <td><span class="status status-active">Installed</span><br/><span class="tag-code">G-11W4ERMPNB</span></td>
+        <td><span class="status status-active">Installed (x2)</span><br/><span class="tag-code">G-24Q8WP33Y3</span><br/><span class="tag-code">G-V98ZYDZ7B5</span></td>
+        <td>Both sites have GA4. TexasAllergyMD has two separate GA4 properties, suggesting multiple stakeholders or accounts.</td>
+      </tr>
+      <tr>
+        <td><strong>Google Tag Manager</strong></td>
+        <td><span class="status status-active">Installed</span><br/><span class="tag-code">GTM-5SNCSN44</span></td>
+        <td><span class="status status-active">Installed</span><br/><span class="tag-code">GTM-N2VGF2WJ</span></td>
+        <td>Both sites use GTM. The container is the right place to add Meta Pixel, conversion events, and remarketing tags.</td>
+      </tr>
+      <tr>
+        <td><strong>Universal Analytics (legacy)</strong></td>
+        <td><span class="status status-none">Not present</span></td>
+        <td><span class="status status-warn">Still firing</span><br/><span class="tag-code">UA-231588930-11</span></td>
+        <td>UA was deprecated by Google in July 2023. Still firing on TexasAllergyMD — sends no data. Should be removed.</td>
+      </tr>
+      <tr>
+        <td><strong>GTM Container Use</strong></td>
+        <td><span class="status status-partial">SEO only</span></td>
+        <td><span class="status status-partial">GA4 + schema</span></td>
+        <td>Safe2Bite's GTM holds only JSON-LD schema tags (31 tags). TexasAllergyMD's GTM has 74 custom HTML tags and 18 GA4 event tags — more mature setup but still no ad pixels inside.</td>
+      </tr>
+      <tr>
+        <td><strong>/thank-you/ page</strong></td>
+        <td><span class="status status-partial">Exists, no events</span></td>
+        <td><span class="status status-warn">Exists, phone only</span></td>
+        <td>Both have thank-you pages (noindex) but neither fires a form submission conversion event. TexasAllergyMD fires the phone call tag sitewide including the thank-you page, not a distinct form-fill conversion.</td>
+      </tr>
+      <tr>
+        <td><strong>Dedicated Landing Pages</strong></td>
+        <td><span class="status status-none">None</span></td>
+        <td><span class="status status-none">None</span></td>
+        <td>Neither site has campaign-specific landing pages. Ads send traffic to regular site pages, making it impossible to control message match or isolate ad conversion rates.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider" />
+
+  <!-- ISSUES SECTION -->
+  <p class="section-label">Issues &amp; Gaps</p>
+
+  <div class="issue-box issue-red">
+    <strong>Safe2Bite: Zero paid ad infrastructure</strong>
+    <p>No Google Ads, no Meta Pixel, no conversion tracking of any kind. The website is receiving only organic and direct traffic. There is no mechanism to measure or grow paid acquisition for the Safe2Bite brand.</p>
+  </div>
+
+  <div class="issue-box issue-red">
+    <strong>Neither brand has Meta Pixel installed</strong>
+    <p>No Facebook or Instagram advertising infrastructure exists on either site. No retargeting audiences are being built. The food allergy and OIT category on Meta is completely uncontested in North Texas — any competitor who installs a pixel now will own that audience pool first.</p>
+  </div>
+
+  <div class="issue-box issue-orange">
+    <strong>TexasAllergyMD tracks phone calls only, not form submissions</strong>
+    <p>The Google Ads conversion tag fires sitewide for phone calls. There is no separate event firing when a user submits the appointment request form. This means Google's algorithm is optimising towards callers only, potentially excluding high-intent patients who prefer to book online.</p>
+  </div>
+
+  <div class="issue-box issue-orange">
+    <strong>No dedicated landing pages for ad campaigns</strong>
+    <p>Google Ads traffic goes to standard site pages. There is no controlled environment for ad-to-page message match, headline testing, or isolating paid conversion rates. This also means the practice cannot A/B test offer framing or calls to action specifically for ad traffic.</p>
+  </div>
+
+  <div class="issue-box issue-yellow">
+    <strong>No Bing Ads on either site</strong>
+    <p>Microsoft Search Ads (Bing) typically deliver 15 to 25% lower CPCs than Google for medical and healthcare search terms, while reaching a largely non-overlapping audience. Neither site has a Bing UET tag installed.</p>
+  </div>
+
+  <div class="issue-box issue-yellow">
+    <strong>TexasAllergyMD still firing a deprecated Universal Analytics tag</strong>
+    <p>UA-231588930-11 is still in the page head. Google sunset Universal Analytics in July 2023 — this tag sends no data and creates unnecessary page load. It should be removed.</p>
+  </div>
+
+  <div class="issue-box issue-green">
+    <strong>Opportunity: GTM is already installed on both sites</strong>
+    <p>Both sites use Google Tag Manager. Meta Pixel, Google Ads conversion events, form submission tracking, and remarketing audiences can all be deployed through GTM without touching the website code. Setup time is hours, not weeks.</p>
+  </div>
+
+</div>
+
+<!-- ============================== TAB 3: COMPETITORS ============================== -->
+<div id="tab-competitors" class="tab-content">
+
+  <p class="section-label">Competitor Landscape</p>
+  <h2 class="section-title">Who Is Running Ads in This Space</h2>
+  <p class="section-desc">Checked each competitor's website for Google Ads tags (AW-), Meta Pixel (fbq), Microsoft UET, and GTM. Ad status reflects what is technically confirmed from their live websites as of June 2026.</p>
+
+  <div class="summary-strip">
+    <strong>Key finding:</strong> Two well-funded competitors are confirmed running Google Search Ads in the McKinney, Frisco, and broader DFW market. Neither has Meta Pixel either, meaning the social advertising space is wide open across the entire category.
+  </div>
+
+  <!-- McKinney / Prosper -->
+  <p class="section-label" style="margin-top: 8px;">McKinney / Prosper Area</p>
+  <div class="card" style="padding:0;overflow:hidden;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Competitor</th>
+          <th>Website</th>
+          <th>Google Ads</th>
+          <th>Meta Ads</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="comp-name">Aspire Allergy &amp; Sinus</td>
+          <td><a href="https://aspireallergy.com" target="_blank">aspireallergy.com</a></td>
+          <td><span class="status status-active">Confirmed</span></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td>Large multi-state chain. AW-999553525 confirmed. Has GTM and GA4. Highest-funded competitor in the market.</td>
+        </tr>
+        <tr>
+          <td class="comp-name">Southwest Allergy &amp; Asthma Center</td>
+          <td><a href="https://swallergy.com" target="_blank">swallergy.com</a></td>
+          <td><span class="status status-active">Confirmed</span></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td>AW-16871687083 found inside GTM container. McKinney location at 7785 Eldorado Pkwy.</td>
+        </tr>
+        <tr>
+          <td class="comp-name">ENT &amp; Allergy Specialists</td>
+          <td><a href="https://enttx.com" target="_blank">enttx.com</a></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td>McKinney allergy location. No tracking tags found. Organic-only presence.</td>
+        </tr>
+        <tr>
+          <td class="comp-name">McKinney Allergy &amp; Asthma Center</td>
+          <td><a href="https://mckinney-allergy.com" target="_blank">mckinney-allergy.com</a></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td>Independent single-location practice. No paid advertising infrastructure found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Frisco -->
+  <p class="section-label" style="margin-top: 28px;">Frisco Area</p>
+  <div class="card" style="padding:0;overflow:hidden;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Competitor</th>
+          <th>Website</th>
+          <th>Google Ads</th>
+          <th>Meta Ads</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="comp-name">Aspire Allergy &amp; Sinus</td>
+          <td><a href="https://aspireallergy.com" target="_blank">aspireallergy.com</a></td>
+          <td><span class="status status-active">Confirmed</span></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td>Regional reach across all DFW. Same Google Ads account active across locations.</td>
+        </tr>
+        <tr>
+          <td class="comp-name">Allergy Partners of DFW</td>
+          <td><a href="https://allergypartners.com" target="_blank">allergypartners.com</a></td>
+          <td><span class="status status-partial">Unconfirmed</span></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td>GTM installed (GTM-P54PHZZ). No AW- tag found inside the container. May be running search without conversion tracking, or recently set up GTM for future use.</td>
+        </tr>
+        <tr>
+          <td class="comp-name">Southwest Allergy &amp; Asthma Center</td>
+          <td><a href="https://swallergy.com" target="_blank">swallergy.com</a></td>
+          <td><span class="status status-active">Confirmed</span></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td>Google Ads confirmed. Regional DFW reach including Frisco corridor.</td>
+        </tr>
+        <tr>
+          <td class="comp-name">North Texas Allergy &amp; Asthma Center</td>
+          <td><a href="https://northtexasallergy.com" target="_blank">northtexasallergy.com</a></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td>Offers food OIT. No paid tracking found. Organic only.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Southlake / Keller -->
+  <p class="section-label" style="margin-top: 28px;">Southlake / Keller Area</p>
+  <div class="card" style="padding:0;overflow:hidden;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Competitor</th>
+          <th>Website</th>
+          <th>Google Ads</th>
+          <th>Meta Ads</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="comp-name">Aspire Allergy &amp; Sinus</td>
+          <td><a href="https://aspireallergy.com" target="_blank">aspireallergy.com</a></td>
+          <td><span class="status status-active">Confirmed</span></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td>Runs geotargeted campaigns across DFW including Southlake and Keller corridors.</td>
+        </tr>
+        <tr>
+          <td class="comp-name">Southwest Allergy &amp; Asthma Center</td>
+          <td><a href="https://swallergy.com" target="_blank">swallergy.com</a></td>
+          <td><span class="status status-active">Confirmed</span></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td>Active Google Ads. Serves the Tarrant County / Southlake corridor.</td>
+        </tr>
+        <tr>
+          <td class="comp-name">North Texas Allergy &amp; Asthma Center</td>
+          <td><a href="https://northtexasallergy.com" target="_blank">northtexasallergy.com</a></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td>No paid infrastructure. Organic only.</td>
+        </tr>
+        <tr>
+          <td class="comp-name">ENT &amp; Allergy Specialists</td>
+          <td><a href="https://enttx.com" target="_blank">enttx.com</a></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td><span class="status status-none">Not detected</span></td>
+          <td>Has DFW presence. No paid tracking detected on site.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight">
+    <strong>Meta is completely uncontested.</strong> Every single competitor checked — including the largest chain in the market (Aspire) — has zero Meta Pixel on their site. No one in the North Texas allergy and food allergy category is running Facebook or Instagram ads. Whoever installs the pixel first starts building a retargeting audience that no competitor can match.
+  </div>
+
+</div>
+
+<!-- ============================== TAB 4: NEXT STEPS ============================== -->
+<div id="tab-nextsteps" class="tab-content">
+
+  <p class="section-label">On the Call</p>
+  <h2 class="section-title">What We Will Walk Through Together</h2>
+  <p class="section-desc">Based on what we found in the research, here is what we would cover in the discovery call and what we would deliver in the weeks after.</p>
+
+  <div class="card">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h4>Full Google Ads Audit (TexasAllergyMD)</h4>
+        <p>Review the active Google Ads account (AW-11188107517) end to end: campaign structure, keyword targeting, match types, ad copy, Quality Scores, landing page alignment, and wasted spend. Phone call conversion tracking is confirmed but form submissions are not tracked — this is the first thing we fix.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h4>Keyword Research — Both Brands</h4>
+        <p>Map the full search demand for food allergy testing, OIT, SLIT, and general allergy services across McKinney, Frisco, Southlake, and Keller. Identify high-intent, low-competition terms that neither brand is currently ranking or bidding for. Separate keyword sets for Safe2Bite (food allergy only) and TexasAllergyMD (full allergy + immunology).</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h4>Competitor Ad Intelligence</h4>
+        <p>Run a full audit of what Aspire Allergy and Southwest Allergy are bidding on, their ad copy angles, and estimated spend. Identify gaps in their coverage that both brands can move into. Surface any keywords where they are bidding against themselves (Safe2Bite vs TexasAllergyMD on the same terms).</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h4>Meta Ads Strategy</h4>
+        <p>Build the case for Meta (Facebook and Instagram) as a patient acquisition channel. Zero competitors have Meta Pixel installed — this is a first-mover window. We would define the audience (parents of food-allergic children, adults newly diagnosed, OIT-aware patients who have already researched treatment), the funnel structure (TOF awareness to BOF appointment booking), and the creative angles that work in this category.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h4>Tracking and Conversion Setup</h4>
+        <p>Both sites have GTM installed. We would use it to deploy: Meta Pixel on both sites, Google Ads form submission conversion events, Bing UET tag, and proper thank-you page conversion events. No website code changes required from their developer.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <h4>90-Day Growth Plan</h4>
+        <p>Bring everything above into a channel-by-channel paid media plan with budget recommendations, month-by-month milestones, and reporting structure. Delivered as a strategy document specific to Safe2Bite and TexasAllergyMD — not a generic agency template.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXAMPLE REPORT -->
+  <div class="example-card">
+    <div>
+      <h4>Example: What This Looks Like in Practice</h4>
+      <p>We recently built a full paid media strategy report for a healthcare client — covering channel selection, campaign architecture, keyword targeting, ad copy direction, and a 90-day launch roadmap. This is the level of detail we bring to every engagement.</p>
+    </div>
+    <a href="https://nayan1808.github.io/clients/tmp-strategy-report.html" target="_blank">View Example Report &rarr;</a>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
